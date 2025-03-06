@@ -28,11 +28,10 @@ blalabl
 
 ## (2/27) lab 1 mariokart part2
 
-### Optionals
+### Optionals & Typecasting
 - `optionals`: add `?`. e.g. print(name) where `name is type String?` will output `Optional("johanna")`. It's sort of a wrapper.
 - `!` force unwraps it. But beware of: `Fatal error: Unexpectedly found nil while unwrapping an Optional value`: **force-unwrapping an optional value containing nil will crash the app!** so use it only when you're sure it absolutely exists.
 - better way - ***optional-binding***: `if let var = function(){ func2(var)}` var is now only accessible inside the `if-let` curly brace. 
 - if we want to run func2 when var is nil, we can use the `guard` control-flow statment. `guard let var = func() else {fun2(var) return} print("this will run if var is not nil!")`.
-
-### Typecasting
+- comma acts like a logical AND
 
