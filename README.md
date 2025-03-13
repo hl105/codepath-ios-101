@@ -26,7 +26,7 @@ blalabl
 - every UIView has underlying Core Animations layer (CAlayer) that handles low-level rendering. I.e. Every UIView has `layer` property.
 - if launch screen not working go to general -> target -> lanuch screen file add file name without the .storyboard.
 
-## (2/27) lab 1 mariokart part2
+## (2/27, 3/6) lab 2  mariokart part2 & proj 2 world starter
 
 ### Optionals & Typecasting
 - `optionals`: add `?`. e.g. print(name) where `name is type String?` will output `Optional("johanna")`. It's sort of a wrapper.
@@ -35,3 +35,11 @@ blalabl
 - if we want to run func2 when var is nil, we can use the `guard` control-flow statment. `guard let var = func() else {fun2(var) return} print("this will run if var is not nil!")`.
 - comma acts like a logical AND
 
+## (3/13) lab 3 cloudcast
+- `viewcontroller`: manages specific screen/view (ui)
+    - labels, buttons, text fields
+    - logic for user interactions
+-  `interface builder`: visual tool that comes with Apple's Xcode dev env. Devs can create and layout graphical UIs using drag and drop components.
+- `view controller scene`: allows you to keep track of elements being added to view controller. 
+- `autolayout constraints`: specify how elements in UI should be arranged relative to another / how they should respond to changes in screen size/orientation.  
+- `stack view`: UI element that arragnes its subviews in a stack. 
