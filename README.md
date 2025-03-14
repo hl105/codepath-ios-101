@@ -32,7 +32,7 @@ blalabl
 - `optionals`: add `?`. e.g. print(name) where `name is type String?` will output `Optional("johanna")`. It's sort of a wrapper.
 - `!` force unwraps it. But beware of: `Fatal error: Unexpectedly found nil while unwrapping an Optional value`: **force-unwrapping an optional value containing nil will crash the app!** so use it only when you're sure it absolutely exists.
 - better way - ***optional-binding***: `if let var = function(){ func2(var)}` var is now only accessible inside the `if-let` curly brace. 
-- if we want to run func2 when var is nil, we can use the `guard` control-flow statment. `guard let var = func() else {fun2(var) return} print("this will run if var is not nil!")`.
+- if we want to run func2 when var is nil, we can use the `guard` control-flow statment. `guard let var = func() else {fun2(var) assertionFailure() return} print("this will run if var is not nil!")`.
 - comma acts like a logical AND
 
 ## (3/13) lab 3 cloudcast
@@ -43,3 +43,4 @@ blalabl
 - `view controller scene`: allows you to keep track of elements being added to view controller. 
 - `autolayout constraints`: specify how elements in UI should be arranged relative to another / how they should respond to changes in screen size/orientation.  
 - `stack view`: UI element that arragnes its subviews in a stack. 
+- `let alert = UIAlertController()`, `self.present(alert, animated: true, completion: nil)` for alerts.
