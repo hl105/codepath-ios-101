@@ -35,7 +35,7 @@ blalabl
 - if we want to run func2 when var is nil, we can use the `guard` control-flow statment. `guard let var = func() else {fun2(var) assertionFailure() return} print("this will run if var is not nil!")`.
 - comma acts like a logical AND
 
-## (3/13) lab 3 cloudcast
+## (3/12, 3/14) lab 3 cloudcast & project 3 trivia app
 - `viewcontroller`: manages specific screen/view (ui)
     - labels, buttons, text fields
     - logic for user interactions
