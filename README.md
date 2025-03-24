@@ -44,3 +44,9 @@ blalabl
 - `autolayout constraints`: specify how elements in UI should be arranged relative to another / how they should respond to changes in screen size/orientation.  
 - `stack view`: UI element that arragnes its subviews in a stack. 
 - `let alert = UIAlertController()`, `self.present(alert, animated: true, completion: nil)` for alerts.
+
+
+## (3/24) lab 4 cloudcast api &
+- `URLSession` library to fetch data
+- Deserialization: transforming bytes from network to type. We can use JSON response as a regular dictionary. 
+- must execute code that modifies UI on main thread. API calls can be done on background thread.
