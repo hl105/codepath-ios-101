@@ -1,3 +1,4 @@
+
 # Codepath IOS 101
 
 Spring 2025 IOS development classwork / hw
@@ -50,3 +51,5 @@ blalabl
 - `URLSession` library to fetch data
 - Deserialization: transforming bytes from network to type. We can use JSON response as a regular dictionary. 
 - must execute code that modifies UI on main thread. API calls can be done on background thread.
+- Think of the main thread as the person in charge of painting pictures (the user interface). Meanwhile, a helper goes off to do some chore (fetch data) in the background. When the helper finishes, they hand the results back to the painter, who is the only one allowed to paint on the canvas (the screen). DispatchQueue.main.async is like tapping the painter on the shoulder and saying, “Hey, here are the new colors; paint them now!”
+
