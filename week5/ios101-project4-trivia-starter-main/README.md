@@ -17,7 +17,14 @@ The following **required** functionality is completed:
 - [x] True or False questions only have two options.
 
 ## Video Walkthrough
-<div style="position: relative; padding-bottom: 214.28571428571428%; height: 0;"><iframe src="https://www.loom.com/embed/b3567c24486d4c3689cff179d8983410?sid=feefa10b-7181-4000-901f-5d114907d65e" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+<div>
+    <a href="https://www.loom.com/share/b3567c24486d4c3689cff179d8983410">
+      <p>Trivia-API</p>
+    </a>
+    <a href="https://www.loom.com/share/b3567c24486d4c3689cff179d8983410">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/b3567c24486d4c3689cff179d8983410-08ffe05686f1c894-full-play.gif">
+    </a>
+  </div>
 
 ## License
 
