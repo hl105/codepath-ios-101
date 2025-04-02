@@ -47,9 +47,18 @@ blalabl
 - `let alert = UIAlertController()`, `self.present(alert, animated: true, completion: nil)` for alerts.
 
 
-## (3/24) lab 4 cloudcast api &
+## (3/24) lab 5 cloudcast api &
 - `URLSession` library to fetch data
 - Deserialization: transforming bytes from network to type. We can use JSON response as a regular dictionary. 
 - must execute code that modifies UI on main thread. API calls can be done on background thread.
 - Think of the main thread as the person in charge of painting pictures (the user interface). Meanwhile, a helper goes off to do some chore (fetch data) in the background. When the helper finishes, they hand the results back to the painter, who is the only one allowed to paint on the canvas (the screen). DispatchQueue.main.async is like tapping the painter on the shoulder and saying, “Hey, here are the new colors; paint them now!”
 
+
+## (4/2) lab 6 tumbler table view
+- protocol: rule book. `UITableViewDataSource` is a protocol that says "if you want to be my data source, you must provide me the data for each row(cell) in the table"
+- `[weak self]` and `self?` inside closure
+    - ![img](./assets/1.png)
+    - ![img](./assets/2.png)
+- `main thread`
+- table view doesn't know movies changed (after initialized as []), so it doesn't reload itself, we need to explicitly do that.
+- wrap to as many lines as it has room for: `lines` property 0. 
