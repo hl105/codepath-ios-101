@@ -62,3 +62,4 @@ blalabl
 - `main thread`
 - table view doesn't know movies changed (after initialized as []), so it doesn't reload itself, we need to explicitly do that.
 - wrap to as many lines as it has room for: `lines` property 0. 
+- if row is squished make sure u copy cell height to table view row height. 
