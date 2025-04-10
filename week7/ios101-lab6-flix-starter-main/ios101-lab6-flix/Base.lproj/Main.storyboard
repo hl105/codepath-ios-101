@@ -62,7 +62,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Movies" id="xkP-qo-b4b"/>
+                    <navigationItem key="navigationItem" title="Movies" leftItemsSupplementBackButton="YES" id="xkP-qo-b4b"/>
                     <connections>
                         <outlet property="tableView" destination="GeD-fs-Zv6" id="hKJ-gD-A37"/>
                     </connections>
