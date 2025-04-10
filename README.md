@@ -63,3 +63,10 @@ blalabl
 - table view doesn't know movies changed (after initialized as []), so it doesn't reload itself, we need to explicitly do that.
 - wrap to as many lines as it has room for: `lines` property 0. 
 - if row is squished make sure u copy cell height to table view row height. 
+
+## (4/9) lab 7 flix detail
+- push navigation
+    - requires the root view controller to be managed by a `UINavigationController`. 
+    - this utilizes a navigation stack to push new view controllers onto or pop off of. 
+    - add new view controller, create a `show` segue by control dragging (not push bc show is adaptive based on device)
+- we can't set UI elements directly like we did when configuring table view cell bc the Detail View Controller is a `UIViewController` - it has a different lifecycle in terms of creating all of its internal UI elements (=views). So the views added to a view controller aren't created until `viewDidLoad()` is called. So configuring all views inside this ensures that the views have been created beforehand. 
