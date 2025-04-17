@@ -70,3 +70,136 @@ blalabl
     - this utilizes a navigation stack to push new view controllers onto or pop off of. 
     - add new view controller, create a `show` segue by control dragging (not push bc show is adaptive based on device)
 - we can't set UI elements directly like we did when configuring table view cell bc the Detail View Controller is a `UIViewController` - it has a different lifecycle in terms of creating all of its internal UI elements (=views). So the views added to a view controller aren't created until `viewDidLoad()` is called. So configuring all views inside this ensures that the views have been created beforehand. 
+
+## (4/16) lab 8 favorites
+- UIButtons: different states (=State Configuration):
+    - `Default` (the "normal" button state)
+    - `Highlighted` (When a user is pressing down on the button)
+    - `Selected` (Used for making a toggle style button)
+    - `Disabled` (The button will not react to taps)
+- Local Storage
+    - just saving data to memory on device and not server
+    - use `UserDefaults` = basically pinia 
+```swift
+// MARK: - UserDefaults: Basic Types
+
+// Create an instance of UserDefaults
+let defaults = UserDefaults.standard
+
+// SAVE VALUES FOR BASIC TYPES
+//    - Basic types are supported including arrays and dictionaries that contain basic types
+//    - Each value is stored in association with the provided key (i.e. a `key: value` pair)
+defaults.set("Kingsley", forKey: "Name")                                   // String
+defaults.set("9", forKey: "Age")                                           // Int
+defaults.set(true, forKey: "IsFriendly")                                   // Bool
+defaults.set(65.5, forKey: "Weight")                                       // Double / Float
+defaults.set(["Chubs", "Harley"], forKey: "Friends")                       // Array
+defaults.set(["food": "duck", "brand": "Acme Dog"], forKey: "FeedingInfo") // Dictionary
+defaults.set(Date(), forKey: "Birthday")                                   // Date
+
+// RETRIEVE VALUES FOR BASIC TYPES
+//    - Use available convenience methods based on type
+//    - Some methods return a default value if the value can't be found for the given key while others    return an optional value.
+let name = defaults.string(forKey: "Name")           // returns String? (optional)
+let age = defaults.integer(forKey: "Age")            // returns Int (default value: 0)
+let isFriendly = defaults.bool(forKey: "IsFriendly") // returns Bool (default value: false)
+let weight = defaults.double(forKey: "Weight")       // returns Double (default value: 0)
+let website = defaults.url(forKey: "Website")        // returns URL? (optional)
+
+// RETRIEVE ARRAYS, DICTIONARIES AND DATES
+//    - These types don't have convenience methods
+//    - Use the object(forKey:) method in this case and cast to the specific data type.
+let birthday = defaults.object(forKey: "Birthday") as? Date                   // returns Data? (optional)
+let friends = defaults.object(forKey: "Friends") as? [String]                 // returns [String]?    (optional)
+let feedingInfo = defaults.object(forKey: "FeedingInfo") as? [String: String] // returns [String: String]? (optional)
+
+// REMOVE VALUES
+// This is the same for any data type, just pass in the key for the value you want removed!
+defaults.removeObject(forKey: "Name")
+
+
+// bind the key to symbol
+enum DefaultsKey {
+    static let name = "Name"
+    static let highScore = "HighScore"
+    // add more keys here
+}
+
+// usage
+UserDefaults.standard.set("Alice", forKey: DefaultsKey.name)
+```
+- Custom Objects
+```swift
+// MARK: - UserDefaults: Custom Objects
+//
+// 1. CREATE A CUSTOM OBJECT
+// 2. Implement the `Codable` protocol.
+//    - The `Codable` protocol combines both `Encodable` and `Decodable` protocols which allows the object to be both encoded by the JSONEncoder and decoded by the    JSONDecoder.
+//    - A basic implementation of the `Codable` protocol is synthesized automatically behind the scenes when possible (i.e. the specific instructions for how to encode and decode an object) so no need to do ad any protocol specific methods in this case.
+// ------
+
+// 1.       2.
+struct Dog: Codable {
+    let name: String
+    let age: Int
+}
+
+// 1. Create an instance of the custom type
+// 2. Encode custom object to `Data`
+//    - The `encode()` method can throw an error so the compiler will remind us we need to add a `try` before it to handle any thrown errors. There are 3 ways to handle `try`:
+//    i. Use `try` wrapped in a `do - catch` statement.
+//    ii. Use `try?` which will convert any error to a return value of `nil`.
+//    iii. Use `try!` which will crash the app if an eror is thrown, similar to force unwrapping an optional.
+// 3. Save the encoded `Data` to UserDefaults
+// -------
+
+// 1.
+let dog = Dog(name: "Kingsley", age: 9)
+// 2.
+let encodedDogData = try! JSONEncoder().encode(dog)
+// 1.
+defaults.set(encodedDogData, forKey: "Kingsley")
+
+// RETRIEVE CUSTOM OBJECT
+// 1. Get the `Data` from UserDefaults
+// 2. Decode the `Data` into the custom object
+// ------
+
+// 1.
+let dogData = defaults.data(forKey: "Kingsley")!
+// 2.
+let decodedDog = try! JSONDecoder().decode(Dog.self, from: dogData)
+
+// REMOVE CUSTOM OBJECT
+// This is the same as removing any value or object from UserDefaults
+
+defaults.removeObject(forKey: "Kingsley")
+```
+
+#### Q: Why not just plug every tab straight into a single scene?
+A: You can if a section never digs any deeper. For example, a static “About” page can sit directly under a tab with no Navigation Controller in sight.
+
+The moment a section needs a second screen—‑say your Favorites list pushes a Details page—‑you need a place to:
+	1.	Remember the stack (Favorites → Details → maybe Edit Details …).
+	2.	Draw and animate that “Back” behavior automatically.
+	3.	Keep the top navigation bar in sync (title, buttons, large/small style).
+
+Apple’s answer is “wrap the root screen of that tab in a Navigation Controller.” It supplies all that for free; you just say pushViewController(_:animated:) or use a Show segue and the controller takes care of the rest.
+
+#### What the Tab Bar Controller needs
+
+A UITabBarController is basically an array of child view controllers.
+When the storyboard is inflated it asks Apple’s runtime:
+
+“Hey, give me the list of kids I’m supposed to manage.”
+
+Those children are provided via relationship segues whose type is view controllers.
+
+If you don’t wire the segue, the tab bar has no idea the navigation controller exists—so that tab would show up blank.
+
+#### etc.
+
+	•	viewDidLoad → set‑and‑forget wiring.
+	•	viewWillAppear → always‑up‑to‑date data fetch.
+	•	defer → bullet‑proof “do this last, no excuses.”
+	•	Fetch list → assign → reload → defer updates UI polish.
